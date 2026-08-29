@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud9.Omg.Connector", "src\Cloud9.Omg.Connector\Cloud9.Omg.Connector.csproj", "{10CA59BC-8C25-4056-8233-8C32FA7A51AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud9.Omg.Connector.Tests", "tests\Cloud9.Omg.Connector.Tests\Cloud9.Omg.Connector.Tests.csproj", "{CC83E6FC-D579-40B9-B32A-9D6C013202B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10CA59BC-8C25-4056-8233-8C32FA7A51AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CA59BC-8C25-4056-8233-8C32FA7A51AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CA59BC-8C25-4056-8233-8C32FA7A51AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CA59BC-8C25-4056-8233-8C32FA7A51AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC83E6FC-D579-40B9-B32A-9D6C013202B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC83E6FC-D579-40B9-B32A-9D6C013202B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC83E6FC-D579-40B9-B32A-9D6C013202B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC83E6FC-D579-40B9-B32A-9D6C013202B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

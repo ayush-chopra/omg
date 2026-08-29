@@ -1,0 +1,42 @@
+# .NET build and package output
+[Bb]in/
+[Oo]bj/
+packages/
+artifacts/
+publish/
+*.nupkg
+*.snupkg
+
+# Test and coverage output
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.coveragexml
+
+# IDE and user-specific files
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Runtime data and logs
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# Local environment files may contain credentials
+.env
+.env.*
+!.env.example
+
+# Keep the empty runtime directory structure in Git
+!/storage/.gitkeep
+!/storage/logs/.gitkeep
