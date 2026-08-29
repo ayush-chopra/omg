@@ -1,6 +1,6 @@
 # Cloud9 Express ↔ OMG Company Store Connector
 
-Standalone C# connector targeting **.NET Framework 4.8**. It is separate from the WooCommerce project.
+Standalone C# connector targeting **.NET Framework 4.8**.
 
 ## Current scope
 
