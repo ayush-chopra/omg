@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Net;
-using System.ServiceProcess;
 using System.Threading;
 using Cloud9.Omg.Connector.Configuration;
 using Cloud9.Omg.Connector.Hosting;
@@ -33,25 +32,26 @@ namespace Cloud9.Omg.Connector
                 }
 
                 var runtime = new ConnectorRuntime(root);
-                var forceConsole = args.Any(argument =>
-                    string.Equals(argument, "--console", StringComparison.OrdinalIgnoreCase));
-                if (!Environment.UserInteractive && !forceConsole)
-                {
-                    ServiceBase.Run(new ConnectorWindowsService(runtime));
-                    return 0;
-                }
-
                 using (runtime)
                 using (var stopped = new ManualResetEventSlim(false))
                 {
-                    Console.CancelKeyPress += (sender, eventArgs) =>
+                    ConsoleCancelEventHandler stopHandler = (sender, eventArgs) =>
                     {
                         eventArgs.Cancel = true;
                         stopped.Set();
                     };
-                    runtime.Start();
-                    Console.WriteLine("Press Ctrl+C to stop.");
-                    stopped.Wait();
+
+                    Console.CancelKeyPress += stopHandler;
+                    try
+                    {
+                        runtime.Start();
+                        Console.WriteLine("Cloud9 OMG Connector is running. Press Ctrl+C to stop.");
+                        stopped.Wait();
+                    }
+                    finally
+                    {
+                        Console.CancelKeyPress -= stopHandler;
+                    }
                 }
 
                 return 0;

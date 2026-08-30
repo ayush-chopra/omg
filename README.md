@@ -41,7 +41,7 @@ Cloud9.Omg.Connector.sln
 ├── src/Cloud9.Omg.Connector
 │   ├── Clients          OMG and Cloud9 HTTP clients
 │   ├── Configuration    .NET Framework app settings
-│   ├── Hosting          Windows Service and 15-minute timer
+│   ├── Hosting          console runtime and 15-minute timer
 │   ├── Models           API JSON contracts
 │   ├── Persistence      LiteDB cursor, audit and idempotency state
 │   ├── Services         order mapping, synchronization and callback logic
@@ -57,7 +57,7 @@ Use a Windows machine with Visual Studio 2022 Build Tools and the .NET Framework
 msbuild Cloud9.Omg.Connector.sln /restore /p:Configuration=Release
 ```
 
-The code also compiles from the .NET SDK when the reference-assemblies package is restored. The production Windows Service deployment requires Windows, while development builds and tests can run through Mono.
+The code also compiles from the .NET SDK when the reference-assemblies package is restored. The application is a console executable. Windows is the intended production platform, while development builds and tests can run through Mono.
 
 For development verification on macOS, Mono can execute the Framework-targeted binary and xUnit console runner:
 
@@ -65,7 +65,7 @@ For development verification on macOS, Mono can execute the Framework-targeted b
 dotnet build Cloud9.Omg.Connector.sln --configuration Release
 mono ~/.nuget/packages/xunit.runner.console/2.9.3/tools/net48/xunit.console.exe \
   tests/Cloud9.Omg.Connector.Tests/bin/Release/net48/Cloud9.Omg.Connector.Tests.dll -noshadow
-mono src/Cloud9.Omg.Connector/bin/Release/net48/Cloud9.Omg.Connector.exe --console
+mono src/Cloud9.Omg.Connector/bin/Release/net48/Cloud9.Omg.Connector.exe
 ```
 
 Production remains Windows-only, but the connector, HTTP host, scheduler, and pure-managed LiteDB store are testable on macOS through Mono.
@@ -89,11 +89,13 @@ Set either `Cloud9ShopCode`, or both `Cloud9CarrierScac` and `Cloud9CarrierServi
 
 ## Run modes
 
-Interactive development host:
+Start the console host, callback listener, and polling timer:
 
 ```powershell
-Cloud9.Omg.Connector.exe --console
+Cloud9.Omg.Connector.exe
 ```
+
+Press `Ctrl+C` to shut down cleanly.
 
 Run one polling cycle without starting the callback listener:
 
@@ -121,8 +123,8 @@ The preferred authentication is either `Authorization: Bearer <token>` or `X-Clo
 - Obtain the Cloud9 API URL, user, password, location ID, and shop code/service mapping.
 - Ask Cloud9 to confirm callback authentication and register the public HTTPS callback URL.
 - Put IIS or another TLS reverse proxy in front of the local OWIN listener.
-- Confirm the service account can write the configured embedded-database directory.
+- Confirm the account running the console process can write the configured embedded-database directory.
 - Agree on package defaults and the manual handling process.
 - Test new orders, updated orders, duplicate callbacks, one-package shipments, multiple packages, voids, returns, and API outages in non-production environments.
 
-See [Windows deployment](docs/WINDOWS-DEPLOYMENT.md) and [API decisions](docs/API-DECISIONS.md) for the production handoff.
+See [Windows console deployment](docs/WINDOWS-DEPLOYMENT.md) and [API decisions](docs/API-DECISIONS.md) for the production handoff.
